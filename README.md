@@ -2,8 +2,6 @@
 
 This repository contains the database schema and SQL scripts for an e-commerce platform, created as part of a mentorship tasks under Eng. Ahmed Emad. The task is based on concepts from the book "Practical Web Database Design".
 
----
-
 ## Table of Contents
 
 1. [Database Schema](#database-schema)
@@ -13,8 +11,7 @@ This repository contains the database schema and SQL scripts for an e-commerce p
    - [Daily Revenue Report](#daily-revenue-report)
    - [Monthly Top-Selling Products Report](#monthly-top-selling-products-report)
    - [High-Value Customers Report](#high-value-customers-report)
-
----
+5. [Applying Denormalization to Customer and Order Entities](#applying-denormalization-to-customer-and-order-entities)
 
 ## Database Schema
 
@@ -82,8 +79,6 @@ CREATE TABLE order_details(
 );
 ```
 
----
-
 ## Entity Relationships
 
 ### 1. `product` and `category` (One-to-Many)
@@ -108,13 +103,9 @@ CREATE TABLE order_details(
 
   ![customer-order-relationship](./schema/diagrams/customer-order-relationship.png)
 
----
-
 ## Entity Relationship Diagram (ERD)
 
 ![ecommerce-erd](./schema/diagrams/e-commerce-erd.drawio.png)
-
----
 
 ## Sample Queries
 
@@ -132,8 +123,6 @@ GROUP BY order_date;
 ```
 
 ![daily-revenue-report](./assest/daily-revenue-report.png)
-
----
 
 ### Monthly Top-Selling Products Report
 
@@ -186,4 +175,42 @@ ORDER BY
 
 ![high-value-customer-report](./assest/high-value-customer-report.png)
 
----
+## Applying Denormalization to Customer and Order Entities
+
+Denormalization is a technique used to improve read performance by reducing the number of joins required in queries. In this case, we can apply denormalization to the customer and order entities by creating a separate table (`order_history`) that pre-computes the result of joining these tables.
+
+```sql
+CREATE TABLE order_history (
+    order_id INTEGER NOT NULL,
+    order_date TIMESTAMP NOT NULL,
+    total_amount NUMERIC(7,2) CHECK(total_amount > 0),
+
+    customer_id INTEGER NOT NULL,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+
+    FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+
+    PRIMARY KEY (order_id)
+);
+
+
+INSERT INTO order_history (order_id, order_date, total_amount,
+                           customer_id, first_name, last_name, email)
+SELECT
+    o.order_id,
+    o.order_date,
+    o.total_amount,
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    c.email
+FROM
+    orders AS o
+    JOIN customer AS c ON c.customer_id = o.customer_id;
+
+```
+
+![order-history-report](./assest/order-history-report.png)
