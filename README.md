@@ -153,8 +153,6 @@ LIMIT 5;
 
 ![monthly-top-selling-product-report](./assest/monthly-top-selling-product-report.png)
 
----
-
 ### High-Value Customers Report
 
 Retrieves a list of customers who have placed orders totaling more than $500 in the past month.
