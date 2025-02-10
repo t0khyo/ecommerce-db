@@ -117,10 +117,15 @@ Generates a report of the total revenue for a specific date.
 SELECT
     DATE(order_date) AS ORDER_DATE,
     SUM(total_amount) AS DAILY_REVENUE
-FROM orders
-WHERE DATE(order_date) = '2025-01-01'
-GROUP BY order_date;
+FROM
+    orders
+WHERE
+    DATE(order_date) = '2025-01-01'
+GROUP BY
+    DATE(order_date);
 ```
+
+![daily-orders](./assest/daily-orders.png)
 
 ![daily-revenue-report](./assest/daily-revenue-report.png)
 
