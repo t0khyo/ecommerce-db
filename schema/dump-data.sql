@@ -31,8 +31,9 @@ VALUES
 -- Insert data into product table
 INSERT INTO product (category_id, name, description, price, stock_quantity)
 VALUES
-    (1, 'Smartphone', 'Latest model smartphone with all features', 699.99, 100),
-    (1, 'Laptop', 'High-performance laptop for work and play', 1299.99, 50),
+    (1, 'Smartphone', 'Latest model smartphone with 4 great cameras.', 699.99, 100),
+    (1, 'Laptop', 'High-performance laptop for work and gaming, have 1080 camera,', 1299.99, 50),
+    (1, 'CAMERA', 'High-resolution Camera with 50mp lens', 759.99, 30),
     (2, 'T-Shirt', 'Comfortable cotton t-shirt', 19.99, 200),
     (2, 'Jeans', 'Stylish denim jeans', 39.99, 150),
     (3, 'Novel', 'Bestselling fiction novel', 14.99, 300),

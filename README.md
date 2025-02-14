@@ -178,6 +178,27 @@ ORDER BY
 
 ![high-value-customer-report](./assest/high-value-customer-report.png)
 
+### Search for Products
+
+Searches for all products with the word "camera" in either the product name or description.
+
+```sql
+SELECT 
+    product_id,
+    name,
+    description,
+    price,
+    category_id
+FROM product
+WHERE 
+    LOWER(name) LIKE '%camera%'
+    OR
+    LOWER(description) LIKE '%camera%'
+LIMIT 10 OFFSET 0;
+```
+
+![search-for-product](./assest/search-for-product.png)
+
 ## Applying Denormalization to Customer and Order Entities
 
 Denormalization is a technique used to improve read performance by reducing the number of joins required in queries. In this case, we can apply denormalization to the customer and order entities by creating a separate table (`order_history`) that pre-computes the result of joining these tables.
