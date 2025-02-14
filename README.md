@@ -11,6 +11,7 @@ This repository contains the database schema and SQL scripts for an e-commerce p
    - [Daily Revenue Report](#daily-revenue-report)
    - [Monthly Top-Selling Products Report](#monthly-top-selling-products-report)
    - [High-Value Customers Report](#high-value-customers-report)
+   - [Search For Products](#search-for-products)
 5. [Applying Denormalization to Customer and Order Entities](#applying-denormalization-to-customer-and-order-entities)
 
 ## Database Schema
