@@ -7,6 +7,7 @@
 \i schema/tables/product.sql
 \i schema/tables/orders.sql
 \i schema/tables/order_details.sql
+\i schema/tables/order_history.sql
 
 -- Insert sample data
 \i schema/dump-data.sql

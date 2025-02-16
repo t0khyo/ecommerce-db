@@ -34,6 +34,9 @@ VALUES
     (1, 'Smartphone', 'Latest model smartphone with 4 great cameras.', 699.99, 100),
     (1, 'Laptop', 'High-performance laptop for work and gaming, have 1080 camera,', 1299.99, 50),
     (1, 'CAMERA', 'High-resolution Camera with 50mp lens', 759.99, 30),
+    (1, 'TV', 'High-resolution TV', 1259.99, 17),
+    (1, 'Fridge', 'cool', 1259.99, 17),
+    (1, 'earbuds', 'cool earbuds', 1259.99, 17),
     (2, 'T-Shirt', 'Comfortable cotton t-shirt', 19.99, 200),
     (2, 'Jeans', 'Stylish denim jeans', 39.99, 150),
     (3, 'Novel', 'Bestselling fiction novel', 14.99, 300),
@@ -100,12 +103,15 @@ VALUES
     (1, 1, 1, 699.99),
     (1, 2, 1, 19.99),
     (2, 1, 1, 1299.99),
+    (2, 3, 1, 1299.99),
     (2, 3, 1, 19.99),
-    (3, 5, 6, 14.99),
+    (3, 7, 6, 14.99),
+    (3, 2, 1, 1400.99),
     (4, 4, 2, 39.99),
-    (5, 3, 3, 19.99),
+    (5, 3, 2, 19.99),
     (6, 6, 2, 25.99),
     (6, 7, 1, 45.50),
+    (6, 3, 2, 45.50),
     (7, 8, 3, 2.99),
     (7, 9, 1, 8.49),
     (8, 10, 1, 4.99),
@@ -117,8 +123,8 @@ VALUES
     (11, 1, 1, 499.99),
     (11, 3, 1, 19.99),
     (12, 4, 2, 39.99),
-    (12, 5, 3, 14.99),
-    (13, 6, 2, 25.99),
+    (22, 5, 3, 14.99),
+    (13, 6, 10, 25.99),
     (13, 7, 1, 45.50),
     (14, 8, 3, 2.99),
     (14, 9, 1, 8.49),
@@ -131,7 +137,7 @@ VALUES
     (18, 2, 2, 19.99),
     (18, 3, 1, 19.99),
     (19, 4, 1, 39.99),
-    (19, 5, 2, 14.99),
+    (18, 5, 2, 14.99),
     (20, 6, 3, 25.99),
     (20, 7, 1, 45.50),
     (21, 8, 4, 2.99),
@@ -154,6 +160,20 @@ VALUES
     (29, 11, 3, 12.49),
     (30, 12, 1, 85.99),
     (30, 13, 4, 19.99),
-    (31, 14, 1, 19.99),
-    (31, 15, 6, 2.99);
+    (31, 5, 1, 19.99),
+    (31, 4, 6, 2.99);
 
+
+INSERT INTO order_history (order_id, order_date, total_amount,
+                           customer_id, first_name, last_name, email)
+SELECT
+    o.order_id,
+    o.order_date,
+    o.total_amount,
+    c.customer_id,
+    c.first_name,
+    c.last_name,
+    c.email
+FROM
+    orders AS o
+    JOIN customer AS c ON c.customer_id = o.customer_id;
