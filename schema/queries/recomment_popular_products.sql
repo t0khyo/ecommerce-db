@@ -1,7 +1,7 @@
 -- /* design a query to 
---     suggest popular products in the same category 
---       for the same author, 
---       excluding the Purchased before product from the recommendations?
+--      suggest popular products in the same category 
+--      for the same author, 
+--      excluding the Purchased before product from the recommendations?
 -- */
 
 -- @block Step 1: Identify the popular products in a category

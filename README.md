@@ -263,7 +263,7 @@ GROUP BY
     p.product_id, p.name, p.category_id
 ORDER BY
     total_sold DESC
-LIMIT 5;
+LIMIT 3;
 ```
 
 ![recommend-popular-products](./assest/recommend-popular-products.png)
