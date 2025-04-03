@@ -14,6 +14,8 @@ This repository contains the database schema and SQL scripts for an e-commerce p
    - [Search For Products](#search-for-products)
    - [Recommend Popular Products in the Same Category](#recommend-popular-products-in-the-same-category)
 5. [Applying Denormalization to Customer and Order Entities](#applying-denormalization-to-customer-and-order-entities)
+6. [Transaction Locking Example](#transaction-locking-example)
+   - [Product Row Update](#product-row-update)
 
 ## Database Schema
 
@@ -289,7 +291,6 @@ CREATE TABLE order_history (
     PRIMARY KEY (order_id)
 );
 
-
 INSERT INTO order_history (order_id, order_date, total_amount,
                            customer_id, first_name, last_name, email)
 SELECT
@@ -307,3 +308,22 @@ FROM
 ```
 
 ![order-history-report](./assest/order-history-report.png)
+
+## Transaction and Locking Examples
+
+### Product Row Update
+
+```sql
+BEGIN;
+
+SELECT *
+FROM product
+WHERE product_id = 211
+FOR UPDATE;
+
+UPDATE product
+SET stock_quantity = stock_quantity - 1
+WHERE product_id = 211;
+
+COMMIT;
+```
